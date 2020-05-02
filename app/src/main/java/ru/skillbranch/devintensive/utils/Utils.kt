@@ -3,9 +3,9 @@ package ru.skillbranch.devintensive.utils
 object Utils {
     fun parseFullName(fullName: String?): Pair<String?, String?> {
         val parts: List<String>? = fullName?.trim()?.split(" ")
-        var firstName = parts?.getOrNull(0) ?: "null"
-        val lastName = parts?.getOrNull(1) ?: "null"
-        if (firstName == "" || firstName == " ") firstName = "null"
+        var firstName = parts?.getOrNull(0)
+        val lastName = parts?.getOrNull(1)
+        if (firstName == "" || firstName == " ") firstName = null
         return firstName to lastName
     }
 
@@ -60,7 +60,7 @@ object Utils {
         return if (firstLetter != "" || secondLetter != "")
             "$firstLetter$secondLetter"
         else {
-            "null"
+            null
         }
     }
 }
