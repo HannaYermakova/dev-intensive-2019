@@ -12,22 +12,22 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
 
     }
 
-    var answerCounter = 0
+    private var answerCounter = 0
 
     fun listenAnswer(answer: String): Pair<String, Triple<Int, Int, Int>> {
         return if (question.answers.contains(answer)) {
             question = question.nextQuestion()
-            "Отлично - ты справился!\n ${question.question}" to status.color
+            "Отлично - ты справился!\n${question.question}" to status.color
         } else {
             answerCounter++
             if (answerCounter <= 3) {
                 status = status.nextStatus()
-                "Это неправильный ответ\n ${question.question}" to status.color
+                "Это неправильный ответ\n${question.question}" to status.color
             } else {
                 answerCounter = 0
                 status = Status.NORMAL
                 question = Question.NAME
-                "Это неправильный ответ. Давай всё по новой \n ${question.question}" to status.color
+                "Это неправильный ответ. Давай всё по новой\n${question.question}" to status.color
             }
         }
     }
@@ -36,7 +36,7 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
         NORMAL(Triple(255, 255, 255)),
         WARNING(Triple(255, 120, 0)),
         DANGER(Triple(255, 60, 60)),
-        CRITICAL(Triple(255, 255, 0));
+        CRITICAL(Triple(255, 0, 0));
 
         fun nextStatus(): Status {
             return if (ordinal < values().lastIndex) {
@@ -46,7 +46,7 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
     }
 
     enum class Question(var question: String, val answers: List<String>) {
-        NAME("Как меня зовут?", listOf("бендер", "bender")) {
+        NAME("Как меня зовут?", listOf("Бендер", "bender")) {
             override fun nextQuestion(): Question = PROFESSION
         },
         PROFESSION("Назови мою профессию?", listOf("сгибальщик", "bender")) {
