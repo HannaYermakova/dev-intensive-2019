@@ -39,12 +39,12 @@ object PreferencesRepository {
 
     fun saveProfileData(profile: Profile) {
         with(profile) {
-            putValue(FIRST_NAME to "FIRST_NAME")
-            putValue(LAST_NAME to "LAST_NAME")
-            putValue(ABOUT to "ABOUT")
-            putValue(REPOSITORY to "REPOSITORY")
-            putValue(RATING to "RATING")
-            putValue(RESPECT to "RESPECT")
+            putValue(FIRST_NAME to firstName)
+            putValue(LAST_NAME to lastName)
+            putValue(ABOUT to about)
+            putValue(REPOSITORY to repository)
+            putValue(RATING to rating)
+            putValue(RESPECT to respect)
         }
     }
 
@@ -53,8 +53,8 @@ object PreferencesRepository {
         val value = pair.second
 
         when (value) {
-            is String -> putString(key, value)
             is Int -> putInt(key, value)
+            is String -> putString(key, value)
             is Boolean -> putBoolean(key, value)
             is Float -> putFloat(key, value)
             is Long -> putLong(key, value)
