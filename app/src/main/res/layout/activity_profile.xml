@@ -232,11 +232,13 @@
             android:src="@drawable/ic_repo" />
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/wr_repository"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/spacing_normal_16"
             android:layout_marginRight="@dimen/spacing_normal_16"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            app:counterMaxLength="128">
 
             <EditText
                 android:id="@+id/et_repository"
@@ -250,6 +252,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <ImageView
+            android:id="@+id/ic_eye"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_gravity="center"
