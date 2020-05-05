@@ -69,7 +69,7 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun updateTheme(mode: Int) {
-        delegate.localNightMode = mode
+        delegate.setLocalNightMode(mode)
     }
 
     private fun updateUI(profile: Profile) {
@@ -78,7 +78,6 @@ class ProfileActivity : AppCompatActivity() {
                 v.text = it[k].toString()
             }
         }
-
     }
 
     private fun showCurrentMode(isEdit: Boolean) {
