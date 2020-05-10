@@ -16,7 +16,7 @@ fun Date.format(pattern: String = "HH:mm:ss dd.MM.yy"): String {
 
 fun Date.add(value: Int, units: TimeUnits = TimeUnits.SECOND): Date {
     var time = this.time
-    time += when(units){
+    time += when (units) {
         TimeUnits.SECOND -> value * SECOND
         TimeUnits.MINUTE -> value * MINUTE
         TimeUnits.HOUR -> value * HOUR
@@ -30,7 +30,19 @@ fun Date.humanizeDiff(date: Date = Date()): String {
     return ""
 }
 
-enum class TimeUnits{
+fun Date.shortFormat(): String {
+    val pattern = if (this.isSameDay(Date())) "HH:mm" else "dd.MM.yy"
+    val dateFormat = SimpleDateFormat(pattern, Locale("ru"))
+    return dateFormat.format(this)
+}
+
+fun Date.isSameDay(date: Date): Boolean {
+    val day1 = this.time / DAY
+    val day2 = date.time / DAY
+    return day1 == day2
+}
+
+enum class TimeUnits {
     SECOND,
     MINUTE,
     HOUR,
