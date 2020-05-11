@@ -4,7 +4,7 @@
         <attr name="aspectRatio" format="float"/>
     </declare-styleable>
 
-    <declare-styleable name="AvatarImageView">
+    <declare-styleable name="CircleImageView">
         <attr name="aiv_borderColor" format="color"/>
         <attr name="aiv_borderWidth" format="dimension"/>
     </declare-styleable>
