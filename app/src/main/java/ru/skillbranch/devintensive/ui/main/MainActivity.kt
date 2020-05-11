@@ -1,5 +1,6 @@
 package ru.skillbranch.devintensive.ui.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -11,8 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
 import ru.skillbranch.devintensive.R
-import ru.skillbranch.devintensive.ui.adapter.ChatAdapter
-import ru.skillbranch.devintensive.ui.adapter.ChatItemTouchHelperCallback
+import ru.skillbranch.devintensive.ui.adapters.ChatAdapter
+import ru.skillbranch.devintensive.ui.adapters.ChatItemTouchHelperCallback
+import ru.skillbranch.devintensive.ui.group.GroupActivity
 import ru.skillbranch.devintensive.viewmodels.MainViewModel
 
 class MainActivity : AppCompatActivity() {
@@ -37,10 +39,12 @@ class MainActivity : AppCompatActivity() {
             Snackbar.make(rv_chat_list, "Click on ${it.title}", Snackbar.LENGTH_LONG).show()
         }
         val divider = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
-        val touchCallback = ChatItemTouchHelperCallback(chatAdapter){
+        val touchCallback = ChatItemTouchHelperCallback(chatAdapter){chatItem ->
             Log.d("A_MainActivity", "ChatItemTouchHelperCallback")
-            viewModel.addToArchive(it.id)
-            Snackbar.make(rv_chat_list, "Вы точно хотите добавить ${it.title} в архив?", Snackbar.LENGTH_LONG).show()
+            viewModel.addToArchive(chatItem.id)
+            Snackbar.make(rv_chat_list, "Вы точно хотите добавить ${chatItem.title} в архив?", Snackbar.LENGTH_LONG)
+                .setAction("Отменить") {viewModel.restoreFromArchive(chatItem.id)}
+                .show()
         }
         val touchHelper = ItemTouchHelper(touchCallback)
 
@@ -51,7 +55,8 @@ class MainActivity : AppCompatActivity() {
         }
         touchHelper.attachToRecyclerView(rv_chat_list)
         fab.setOnClickListener {
-            //viewModel.addItems()
+            val intent = Intent(this, GroupActivity::class.java)
+            startActivity(intent)
         }
     }
 

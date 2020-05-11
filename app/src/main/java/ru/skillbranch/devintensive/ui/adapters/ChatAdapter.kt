@@ -1,4 +1,4 @@
-package ru.skillbranch.devintensive.ui.adapter
+package ru.skillbranch.devintensive.ui.adapters
 
 import android.graphics.Color
 import android.util.Log
@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_chat_group.*
 import kotlinx.android.synthetic.main.item_chat_single.*
@@ -101,9 +102,12 @@ class ChatAdapter(val listener: (ChatItem) -> Unit) :
 
         override fun bind(item: ChatItem, listener: (ChatItem) -> Unit) {
             if (item.avatar == null) {
+                Glide.with(itemView).clear(iv_avatar_single)
                 iv_avatar_single.setInitials(item.initials)
             } else {
-                //TODO set drawable
+                Glide.with(itemView)
+                    .load(item.avatar)
+                    .into(iv_avatar_single)
             }
             sv_indicator.visibility = if (item.isOnline) View.VISIBLE else View.GONE
             with(tv_date_single) {
