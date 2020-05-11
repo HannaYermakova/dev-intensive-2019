@@ -4,7 +4,7 @@ import android.content.SharedPreferences
 import android.preference.PreferenceManager
 import androidx.appcompat.app.AppCompatDelegate
 import ru.skillbranch.devintensive.App
-import ru.skillbranch.devintensive.models.Profile
+import ru.skillbranch.devintensive.utils.Profile
 
 object PreferencesRepository {
 
@@ -28,14 +28,15 @@ object PreferencesRepository {
 
     fun getAppTheme(): Int = pref.getInt(APP_THEME, AppCompatDelegate.MODE_NIGHT_NO)
 
-    fun getProfile(): Profile = Profile(
-        pref.getString(FIRST_NAME, "")!!,
-        pref.getString(LAST_NAME, "")!!,
-        pref.getString(ABOUT, "")!!,
-        pref.getString(REPOSITORY, "")!!,
-        pref.getInt(RATING, 0),
-        pref.getInt(RESPECT, 0)
-    )
+    fun getProfile(): Profile =
+        Profile(
+            pref.getString(FIRST_NAME, "")!!,
+            pref.getString(LAST_NAME, "")!!,
+            pref.getString(ABOUT, "")!!,
+            pref.getString(REPOSITORY, "")!!,
+            pref.getInt(RATING, 0),
+            pref.getInt(RESPECT, 0)
+        )
 
     fun saveProfileData(profile: Profile) {
         with(profile) {
