@@ -7,7 +7,7 @@ import android.util.Log
 import android.widget.ImageView
 
 @SuppressLint("AppCompatCustomView")
-class AvatarImageView @JvmOverloads constructor(
+class CircleImageView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
