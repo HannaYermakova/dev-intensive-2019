@@ -2,6 +2,8 @@ package ru.skillbranch.devintensive.models
 
 class Bender(var status: Status = Status.NORMAL, var question: Question = Question.NAME) {
 
+    companion object var answerCounter = 0
+
     fun askQuestion(): String = when (question) {
         Question.NAME -> Question.NAME.question
         Question.PROFESSION -> Question.PROFESSION.question
@@ -12,15 +14,13 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
 
     }
 
-    private var answerCounter = 0
-
     fun listenAnswer(answer: String): Pair<String, Triple<Int, Int, Int>> {
         return if (question.answers.contains(answer)) {
             question = question.nextQuestion()
             "Отлично - ты справился\n${question.question}" to status.color
         } else {
             answerCounter++
-            if (answerCounter <= 3) {
+            if (answerCounter < 3) {
                 status = status.nextStatus()
                 "Это неправильный ответ\n${question.question}" to status.color
             } else {
@@ -46,7 +46,7 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
     }
 
     enum class Question(var question: String, val answers: List<String>) {
-        NAME("Как меня зовут?", listOf("Бендер", "bender")) {
+        NAME("Как меня зовут?", listOf("бендер", "bender")) {
             override fun nextQuestion(): Question = PROFESSION
         },
         PROFESSION("Назови мою профессию?", listOf("сгибальщик", "bender")) {
