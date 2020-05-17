@@ -100,9 +100,5 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, TextView.OnEdito
         super.onSaveInstanceState(outState)
         outState.putString("STATUS", benderObj.status.name)
         outState.putString("QUESTION", benderObj.question.name)
-        Log.d(
-            "A_MainActivity",
-            "onSaveInstanceState ${benderObj.status.name}, ${benderObj.question.name}"
-        )
     }
 }

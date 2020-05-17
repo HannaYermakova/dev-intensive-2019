@@ -11,7 +11,6 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
         Question.BDAY -> Question.BDAY.question
         Question.SERIAL -> Question.SERIAL.question
         Question.IDLE -> Question.IDLE.question
-
     }
 
     fun listenAnswer(answer: String): Pair<String, Triple<Int, Int, Int>> {
