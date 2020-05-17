@@ -1,10 +1,12 @@
 package ru.skillbranch.devintensive
 
+import android.content.Context
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
@@ -76,6 +78,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             val (r, g, b) = color
             benderImage.setColorFilter(Color.rgb(r, g, b), PorterDuff.Mode.MULTIPLY)
             textTxt.text = phrase
+            if (currentFocus != null) {
+                val inputManager: InputMethodManager =  getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                inputManager.hideSoftInputFromWindow(currentFocus?.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
+            }
         }
     }
 
@@ -83,6 +89,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         super.onSaveInstanceState(outState)
         outState.putString("STATUS", benderObj.status.name)
         outState.putString("QUESTION", benderObj.question.name)
-        Log.d("A_MainActivity", "onSaveInstanceState ${benderObj.status.name}, ${benderObj.question.name}")
+        Log.d(
+            "A_MainActivity",
+            "onSaveInstanceState ${benderObj.status.name}, ${benderObj.question.name}"
+        )
     }
 }
